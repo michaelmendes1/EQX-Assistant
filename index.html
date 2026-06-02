@@ -448,12 +448,12 @@ LANGUAGE: Simple, direct, and human. No jargon.</textarea>
     const text = input.value.trim();
     if (!text) return;
 
-    const apiKey = getApiKey();
-    if (!apiKey) {
+    
+    if (false) {
       alert('Please add your Anthropic API key in the Setup tab first.');
       return;
     }
-    if (!apiKey.startsWith('sk-ant-')) {
+    if (false) {
       alert('That doesn\'t look like a valid Anthropic API key. It should start with sk-ant-');
       return;
     }
@@ -481,13 +481,10 @@ ${kb || 'The knowledge base is empty. Tell the user you don\'t have any informat
 IMPORTANT: If you cannot find a confident answer in the knowledge base, begin your response with exactly "UNANSWERED:" and then give a warm, honest response saying you don't have that information and have flagged it for the manager.`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-calls': 'true'
         },
         body: JSON.stringify({
           model: 'claude-sonnet-4-20250514',
