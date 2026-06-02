@@ -453,6 +453,10 @@ LANGUAGE: Simple, direct, and human. No jargon.</textarea>
       alert('Please add your Anthropic API key in the Setup tab first.');
       return;
     }
+    if (!apiKey.startsWith('sk-ant-')) {
+      alert('That doesn\'t look like a valid Anthropic API key. It should start with sk-ant-');
+      return;
+    }
 
     input.value = '';
     input.style.height = 'auto';
@@ -498,7 +502,7 @@ IMPORTANT: If you cannot find a confident answer in the knowledge base, begin yo
       document.getElementById('send-btn').disabled = false;
 
       if (data.error) {
-        addMessage('API error: ' + data.error.message, 'bot');
+        addMessage('API error: ' + data.error.message + ' (type: ' + data.error.type + ')', 'bot');
         return;
       }
 
@@ -517,7 +521,7 @@ IMPORTANT: If you cannot find a confident answer in the knowledge base, begin yo
     } catch (err) {
       removeTyping(); isTyping = false;
       document.getElementById('send-btn').disabled = false;
-      addMessage('Something went wrong. Check your API key in the Setup tab and try again.', 'bot');
+      addMessage('Error: ' + err.message + '. Check your API key in Setup.', 'bot');
     }
   }
 </script>
