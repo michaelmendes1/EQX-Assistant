@@ -768,11 +768,19 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
     setTimeout(() => el.style.opacity = '0', 2000);
   }
 
+  function renderMarkdown(text) {
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/
+/g, '<br>');
+  }
+
   function addMessage(text, role) {
     const msgs = document.getElementById('messages');
     const div = document.createElement('div');
     div.className = 'msg ' + role;
-    div.innerHTML = `<div class="msg-label">${role === 'bot' ? 'EQX Ramp' : 'You'}</div><div class="msg-bubble">${text}</div>`;
+    div.innerHTML = `<div class="msg-label">${role === 'bot' ? 'EQX Ramp' : 'You'}</div><div class="msg-bubble">${role === 'bot' ? renderMarkdown(text) : text}</div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
   }
@@ -825,7 +833,7 @@ KNOWLEDGE BASE:
 ${kb || 'The knowledge base is empty.'}
 
 ---
-RULE: If you cannot find a confident answer, start your response with exactly "UNANSWERED:" then give a warm honest response saying you have flagged it for the manager.`;
+RULE: If the exact information requested is not clearly and explicitly in the knowledge base, you MUST start your response with exactly "UNANSWERED:" — do not approximate, infer, or answer a related but different question. If someone asks about monthly projections and you only have weekly projections, that is UNANSWERED. Be precise.`;
 
     try {
       const res = await fetch('/api/chat', {
