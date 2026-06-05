@@ -674,16 +674,12 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
         <div class="section-desc">Connect EQX Ramp to the Anthropic API to power the assistant.</div>
 
         <div class="api-notice">
-          Get your API key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. Your key is saved locally in this browser and sent only to Anthropic.
+          The API key is configured on the server. No action needed — the assistant is ready to use.
         </div>
 
         <div class="card">
-          <div class="card-eyebrow">🔑 Anthropic API Key</div>
-          <input type="password" class="api-input" id="api-key" placeholder="sk-ant-...">
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="saveApiKey()">Save Key</button>
-            <span class="saved-msg" id="api-saved">Saved</span>
-          </div>
+          <div class="card-eyebrow">✅ Status</div>
+          <div style="font-size:13px; color:var(--gray-400); line-height:1.7;">EQX Ramp is connected and ready. The assistant is powered by Claude via a secure server-side API key. No key entry required.</div>
         </div>
       </div>
     </div>
@@ -809,9 +805,6 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
     const input = document.getElementById('chat-input');
     const text = input.value.trim();
     if (!text) return;
-
-    const apiKey = getApiKey();
-    if (!apiKey) { alert('Add your API key in the Setup tab.'); return; }
 
     input.value = ''; input.style.height = 'auto';
     addMessage(text, 'user');
