@@ -12,14 +12,14 @@
     :root {
       --black: #000000;
       --white: #ffffff;
-      --gray-900: #0d0d0d;
-      --gray-800: #1a1a1a;
-      --gray-700: #2a2a2a;
-      --gray-500: #666666;
-      --gray-400: #888888;
-      --gray-200: #cccccc;
-      --divider: rgba(255,255,255,0.1);
-      --divider-strong: rgba(255,255,255,0.2);
+      --g900: #0d0d0d;
+      --g800: #1a1a1a;
+      --g700: #2a2a2a;
+      --g500: #666666;
+      --g400: #888888;
+      --g200: #cccccc;
+      --div: rgba(255,255,255,0.09);
+      --div2: rgba(255,255,255,0.18);
     }
 
     html, body {
@@ -32,121 +32,224 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* LAYOUT */
+    /* ── DESKTOP LAYOUT ── */
     .app {
       display: flex;
-      flex-direction: column;
       height: 100vh;
-      max-width: 100%;
       overflow: hidden;
     }
 
-    /* TOP BAR */
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid var(--divider);
+    /* SIDEBAR (desktop only) */
+    .sidebar {
+      width: 220px;
       flex-shrink: 0;
-      background: var(--black);
+      background: var(--g900);
+      border-right: 1px solid var(--div);
+      display: flex;
+      flex-direction: column;
     }
 
-    .topbar-logo {
+    .sidebar-brand {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid var(--div);
+    }
+
+    .brand-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 0.12em;
-      color: var(--white);
+      font-size: 30px;
+      letter-spacing: 0.1em;
       line-height: 1;
     }
 
-    .topbar-logo span {
-      color: var(--gray-400);
+    .brand-name span { color: var(--g400); }
+
+    .brand-sub {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--g500);
+      margin-top: 5px;
     }
 
-    /* NAV TABS */
-    .nav-tabs {
+    .sidebar-nav { padding: 16px 12px; flex: 1; }
+
+    .nav-group-label {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--g500);
+      padding: 0 12px;
+      margin-bottom: 6px;
+      margin-top: 16px;
+    }
+
+    .nav-group-label:first-child { margin-top: 0; }
+
+    .sidebar-btn {
       display: flex;
-      border-bottom: 1px solid var(--divider);
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 4px;
+      border: none;
+      background: none;
+      color: var(--g400);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+    }
+
+    .sidebar-btn:hover { color: var(--white); background: var(--g800); }
+    .sidebar-btn.active { color: var(--white); background: var(--g800); border-left: 2px solid var(--white); padding-left: 10px; }
+
+    .sidebar-badge {
+      margin-left: auto;
+      background: var(--white);
+      color: var(--black);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 99px;
+    }
+
+    .sidebar-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--div);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--g500);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--white);
+      opacity: 0.5;
+    }
+
+    /* MAIN CONTENT AREA */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    /* MOBILE TOP BAR (hidden on desktop) */
+    .mobile-topbar {
+      display: none;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--div);
+      flex-shrink: 0;
+    }
+
+    .mobile-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.1em;
+    }
+
+    .mobile-brand span { color: var(--g400); }
+
+    /* MOBILE TAB BAR (hidden on desktop) */
+    .mobile-tabs {
+      display: none;
+      border-bottom: 1px solid var(--div);
       flex-shrink: 0;
       overflow-x: auto;
       scrollbar-width: none;
       background: var(--black);
     }
 
-    .nav-tabs::-webkit-scrollbar { display: none; }
+    .mobile-tabs::-webkit-scrollbar { display: none; }
 
-    .nav-tab {
+    .tab-inner {
+      display: flex;
+      min-width: max-content;
+      width: 100%;
+    }
+
+    .tab-btn {
       flex: 1;
-      min-width: 80px;
-      padding: 14px 12px;
+      min-width: 64px;
+      padding: 12px 10px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gray-400);
+      color: var(--g500);
       border: none;
       background: none;
       cursor: pointer;
       border-bottom: 2px solid transparent;
-      transition: all 0.2s;
+      transition: all 0.15s;
       white-space: nowrap;
       text-align: center;
     }
 
-    .nav-tab:hover { color: var(--white); }
-    .nav-tab.active {
-      color: var(--white);
-      border-bottom-color: var(--white);
-    }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.active { color: var(--white); border-bottom-color: var(--white); }
 
-    .nav-badge {
+    .tab-badge {
       display: inline-block;
       background: var(--white);
       color: var(--black);
-      font-size: 9px;
+      font-size: 8px;
       font-weight: 700;
-      padding: 1px 5px;
+      padding: 1px 4px;
       border-radius: 99px;
-      margin-left: 5px;
+      margin-left: 3px;
       vertical-align: middle;
     }
 
     /* VIEWS */
-    .main { flex: 1; overflow: hidden; position: relative; }
+    .views { flex: 1; overflow: hidden; position: relative; }
     .view { display: none; flex-direction: column; height: 100%; }
     .view.active { display: flex; }
+
     .view-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 28px 24px;
+      padding: 32px 32px;
       scrollbar-width: thin;
-      scrollbar-color: var(--gray-700) transparent;
+      scrollbar-color: var(--g700) transparent;
     }
-    .view-scroll::-webkit-scrollbar { width: 3px; }
-    .view-scroll::-webkit-scrollbar-thumb { background: var(--gray-700); }
 
-    /* CHAT VIEW */
+    .view-scroll::-webkit-scrollbar { width: 3px; }
+    .view-scroll::-webkit-scrollbar-thumb { background: var(--g700); }
+
+    /* CHAT */
     .chat-header {
-      padding: 24px 24px 20px;
-      border-bottom: 1px solid var(--divider);
+      padding: 24px 32px 20px;
+      border-bottom: 1px solid var(--div);
       flex-shrink: 0;
     }
 
-    .chat-header-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
+    .eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gray-400);
+      color: var(--g500);
       margin-bottom: 6px;
     }
 
-    .chat-header-title {
+    .panel-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      letter-spacing: 0.08em;
+      font-size: 36px;
+      letter-spacing: 0.06em;
       line-height: 1;
       color: var(--white);
     }
@@ -154,46 +257,53 @@
     .messages {
       flex: 1;
       overflow-y: auto;
-      padding: 24px;
+      padding: 28px 32px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 22px;
       scrollbar-width: thin;
-      scrollbar-color: var(--gray-700) transparent;
+      scrollbar-color: var(--g700) transparent;
     }
 
     .messages::-webkit-scrollbar { width: 3px; }
-    .messages::-webkit-scrollbar-thumb { background: var(--gray-700); }
+    .messages::-webkit-scrollbar-thumb { background: var(--g700); }
 
-    .msg { display: flex; flex-direction: column; max-width: 82%; gap: 6px; animation: fadeUp 0.25s ease; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .msg {
+      display: flex;
+      flex-direction: column;
+      max-width: 78%;
+      gap: 5px;
+      animation: up 0.2s ease;
+    }
+
+    @keyframes up { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
     .msg.user { align-self: flex-end; align-items: flex-end; }
     .msg.bot { align-self: flex-start; }
 
-    .msg-label {
+    .msg-from {
       font-size: 9px;
-      font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gray-500);
+      color: var(--g500);
     }
 
     .msg-bubble {
-      padding: 12px 16px;
+      padding: 13px 17px;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
       color: var(--white);
     }
 
     .msg.bot .msg-bubble {
-      background: var(--gray-900);
-      border: 1px solid var(--divider);
+      background: var(--g900);
+      border: 1px solid var(--div);
       border-radius: 2px 12px 12px 12px;
     }
 
     .msg.user .msg-bubble {
-      background: var(--gray-800);
-      border: 1px solid var(--divider-strong);
+      background: var(--g800);
+      border: 1px solid var(--div2);
       border-radius: 12px 2px 12px 12px;
     }
 
@@ -201,24 +311,23 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      padding: 14px 16px;
+      padding: 14px 17px;
     }
 
     .typing-dots span {
-      width: 5px;
-      height: 5px;
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: var(--gray-500);
+      background: var(--g500);
       animation: dot 1.2s infinite;
     }
 
     .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
     .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes dot { 0%,60%,100% { opacity: 0.3; transform: scale(1); } 30% { opacity: 1; transform: scale(1.3); } }
+    @keyframes dot { 0%,60%,100%{opacity:0.3;transform:scale(1)} 30%{opacity:1;transform:scale(1.3)} }
 
-    .chat-input-bar {
-      padding: 16px 24px;
-      border-top: 1px solid var(--divider);
+    .input-bar {
+      padding: 16px 32px;
+      border-top: 1px solid var(--div);
       display: flex;
       gap: 12px;
       align-items: flex-end;
@@ -228,8 +337,8 @@
 
     .chat-input {
       flex: 1;
-      background: var(--gray-900);
-      border: 1px solid var(--divider-strong);
+      background: var(--g900);
+      border: 1px solid var(--div2);
       border-radius: 4px;
       padding: 12px 16px;
       font-size: 14px;
@@ -243,8 +352,8 @@
       transition: border-color 0.2s;
     }
 
-    .chat-input::placeholder { color: var(--gray-500); }
-    .chat-input:focus { border-color: var(--divider-strong); }
+    .chat-input::placeholder { color: var(--g500); }
+    .chat-input:focus { border-color: rgba(255,255,255,0.3); }
 
     .send-btn {
       width: 44px;
@@ -258,325 +367,261 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      font-size: 20px;
       transition: opacity 0.15s;
-      font-size: 18px;
     }
 
     .send-btn:hover { opacity: 0.85; }
-    .send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .send-btn:disabled { opacity: 0.25; cursor: not-allowed; }
 
-    /* PANEL VIEWS */
-    .section-eyebrow {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gray-400);
-      margin-bottom: 8px;
-    }
-
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .section-desc {
+    /* PANELS */
+    .panel-desc {
       font-size: 13px;
-      color: var(--gray-400);
+      color: var(--g400);
       line-height: 1.7;
       margin-bottom: 28px;
+      margin-top: 8px;
     }
 
-    .divider { border: none; border-top: 1px solid var(--divider); margin: 24px 0; }
-
     .card {
-      background: var(--gray-900);
-      border: 1px solid var(--divider);
+      background: var(--g900);
+      border: 1px solid var(--div);
       border-radius: 4px;
       padding: 20px;
       margin-bottom: 16px;
     }
 
-    .card-eyebrow {
-      font-size: 10px;
-      font-weight: 500;
+    .card-label {
+      font-size: 9px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gray-400);
+      color: var(--g500);
       margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    /* DROP ZONE */
     .drop-zone {
-      border: 1px dashed var(--divider-strong);
+      border: 1px dashed var(--div2);
       border-radius: 4px;
       padding: 28px 20px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 14px;
+      transition: all 0.15s;
+      margin-bottom: 12px;
     }
 
     .drop-zone:hover, .drop-zone.over {
       border-color: var(--white);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02);
     }
 
-    .drop-zone-icon {
-      font-size: 28px;
-      margin-bottom: 10px;
-      opacity: 0.4;
-    }
+    .drop-title { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .drop-sub { font-size: 11px; color: var(--g500); }
 
-    .drop-zone-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-
-    .drop-zone-sub {
-      font-size: 11px;
-      color: var(--gray-500);
-      letter-spacing: 0.04em;
-    }
-
-    /* FILE CHIPS */
-    .file-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .file-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
 
     .file-chip {
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 10px 14px;
-      background: var(--gray-800);
-      border: 1px solid var(--divider);
+      background: var(--g800);
+      border: 1px solid var(--div);
       border-radius: 4px;
       font-size: 12px;
     }
 
-    .file-chip-icon { font-size: 16px; opacity: 0.6; flex-shrink: 0; }
     .file-chip-name { flex: 1; color: var(--white); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .file-chip-size { font-size: 11px; color: var(--gray-500); flex-shrink: 0; font-family: 'DM Mono', monospace; }
-    .file-chip-remove { background: none; border: none; cursor: pointer; color: var(--gray-500); display: flex; padding: 0; transition: color 0.15s; }
+    .file-chip-size { font-size: 11px; color: var(--g500); font-family: 'DM Mono', monospace; }
+    .file-chip-remove { background: none; border: none; cursor: pointer; color: var(--g500); font-size: 14px; transition: color 0.15s; }
     .file-chip-remove:hover { color: var(--white); }
 
-    /* TEXTAREA */
     textarea.field {
       width: 100%;
-      background: var(--gray-900);
-      border: 1px solid var(--divider);
+      background: var(--g900);
+      border: 1px solid var(--div);
       border-radius: 4px;
       padding: 14px 16px;
       font-size: 12px;
       font-family: 'DM Mono', monospace;
-      color: var(--gray-200);
+      color: var(--g200);
       resize: none;
       outline: none;
       line-height: 1.8;
       transition: border-color 0.2s;
     }
 
-    textarea.field:focus { border-color: var(--divider-strong); }
-    textarea.kb-notes { height: 160px; }
-    textarea.instructions-field { font-family: 'DM Sans', sans-serif; height: 200px; font-size: 13px; }
+    textarea.field:focus { border-color: var(--div2); }
+    textarea.kb-notes { height: 200px; }
+    textarea.instr { font-family: 'DM Sans', sans-serif; font-size: 13px; height: 240px; }
 
-    /* BUTTONS */
-    .btn-row { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+    .btn-row { display: flex; align-items: center; gap: 14px; margin-top: 10px; }
 
     .btn {
-      padding: 10px 22px;
-      font-size: 11px;
+      padding: 10px 24px;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       border-radius: 2px;
       border: none;
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
       transition: opacity 0.15s;
+      background: var(--white);
+      color: var(--black);
     }
 
-    .btn-primary { background: var(--white); color: var(--black); }
-    .btn-primary:hover { opacity: 0.85; }
+    .btn:hover { opacity: 0.85; }
 
     .saved-msg {
-      font-size: 11px;
-      letter-spacing: 0.1em;
+      font-size: 10px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gray-400);
+      color: var(--g500);
       opacity: 0;
       transition: opacity 0.3s;
     }
 
     /* LOG */
-    .log-empty {
-      text-align: center;
-      padding: 56px 0;
-      color: var(--gray-500);
-      font-size: 13px;
-      letter-spacing: 0.04em;
-    }
-
-    .log-item {
-      border-top: 1px solid var(--divider);
-      padding: 16px 0;
-    }
-
-    .log-item:last-child { border-bottom: 1px solid var(--divider); }
-
-    .log-q {
-      font-size: 14px;
-      color: var(--white);
-      margin-bottom: 6px;
-      line-height: 1.5;
-    }
-
-    .log-meta {
-      font-size: 10px;
-      color: var(--gray-500);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .log-pill {
-      background: var(--gray-800);
-      border: 1px solid var(--divider-strong);
-      color: var(--gray-200);
-      font-size: 9px;
-      padding: 2px 8px;
-      border-radius: 2px;
-      letter-spacing: 0.1em;
-    }
+    .log-empty { text-align: center; padding: 60px 0; color: var(--g500); font-size: 13px; }
+    .log-item { border-top: 1px solid var(--div); padding: 18px 0; }
+    .log-item:last-child { border-bottom: 1px solid var(--div); }
+    .log-q { font-size: 14px; color: var(--white); margin-bottom: 6px; line-height: 1.5; }
+    .log-meta { font-size: 9px; color: var(--g500); letter-spacing: 0.12em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+    .log-pill { background: var(--g800); border: 1px solid var(--div2); color: var(--g200); font-size: 8px; padding: 2px 8px; border-radius: 2px; letter-spacing: 0.1em; }
 
     /* SETUP */
-    .api-notice {
-      background: var(--gray-900);
-      border: 1px solid var(--divider);
+    .notice {
+      background: var(--g900);
+      border: 1px solid var(--div);
       border-left: 2px solid var(--white);
       border-radius: 2px;
-      padding: 14px 16px;
+      padding: 14px 18px;
       margin-bottom: 20px;
       font-size: 12px;
-      color: var(--gray-400);
+      color: var(--g400);
       line-height: 1.7;
     }
 
-    .api-notice a { color: var(--white); text-decoration: none; border-bottom: 1px solid var(--divider-strong); }
+    .notice a { color: var(--white); }
 
-    .api-input {
-      width: 100%;
-      background: var(--gray-900);
-      border: 1px solid var(--divider);
-      border-radius: 2px;
-      padding: 12px 16px;
-      font-size: 12px;
-      font-family: 'DM Mono', monospace;
-      color: var(--white);
-      outline: none;
-      transition: border-color 0.2s;
-      margin-bottom: 12px;
-    }
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 767px) {
+      .sidebar { display: none; }
+      .mobile-topbar { display: block; }
+      .mobile-tabs { display: flex; }
 
-    .api-input::placeholder { color: var(--gray-500); }
-    .api-input:focus { border-color: var(--divider-strong); }
-
-    /* RESPONSIVE */
-    @media (min-width: 640px) {
-      .app { max-width: 480px; margin: 0 auto; border-left: 1px solid var(--divider); border-right: 1px solid var(--divider); }
-    }
-
-    @media (min-width: 1024px) {
-      .app { max-width: 520px; }
-      .topbar-logo { font-size: 32px; }
+      .chat-header { padding: 20px 20px 16px; }
+      .panel-title { font-size: 28px; }
+      .messages { padding: 20px; gap: 16px; }
+      .input-bar { padding: 12px 16px; }
+      .view-scroll { padding: 24px 20px; }
+      .msg { max-width: 88%; }
     }
   </style>
 </head>
 <body>
 <div class="app">
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="topbar-logo">EQX <span>RAMP</span></div>
-    <div style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-500);">Trainer Onboarding</div>
+  <!-- DESKTOP SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-name">EQX <span>RAMP</span></div>
+      <div class="brand-sub">Club Assistant</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Assistant</div>
+      <button class="sidebar-btn active" onclick="switchView('chat', this)">💬 Chat</button>
+
+      <div class="nav-group-label">Manager</div>
+      <button class="sidebar-btn" onclick="switchView('kb', this)">📚 Knowledge</button>
+      <button class="sidebar-btn" onclick="switchView('instructions', this)">⚙️ Instructions</button>
+      <button class="sidebar-btn" onclick="switchView('log', this)">
+        🚩 Flagged
+        <span class="sidebar-badge" id="sidebar-badge" style="display:none">0</span>
+      </button>
+      <button class="sidebar-btn" onclick="switchView('setup', this)">🔑 Setup</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="status-dot"></div>
+      Assistant Active
+    </div>
   </div>
 
-  <!-- NAV TABS -->
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="switchTab('chat', this)">Chat</button>
-    <button class="nav-tab" onclick="switchTab('kb', this)">Knowledge</button>
-    <button class="nav-tab" onclick="switchTab('instructions', this)">Instructions</button>
-    <button class="nav-tab" onclick="switchTab('log', this)">Flagged <span class="nav-badge" id="badge" style="display:none">0</span></button>
-    <button class="nav-tab" onclick="switchTab('setup', this)">Setup</button>
-  </div>
-
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <div class="main">
 
-    <!-- CHAT -->
-    <div class="view active" id="view-chat">
-      <div class="chat-header">
-        <div class="chat-header-label">AI Assistant</div>
-        <div class="chat-header-title">Ask Anything</div>
-      </div>
-      <div class="messages" id="messages">
-        <div class="msg bot">
-          <div class="msg-label">EQX Ramp</div>
-          <div class="msg-bubble">Welcome. I'm your onboarding assistant. Ask me anything about your role, uniform, systems, pay, or how things work at Equinox.</div>
-        </div>
-      </div>
-      <div class="chat-input-bar">
-        <textarea class="chat-input" id="chat-input" placeholder="Ask a question..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-        <button class="send-btn" id="send-btn" onclick="sendMessage()" aria-label="Send">↑</button>
+    <!-- MOBILE TOP BAR -->
+    <div class="mobile-topbar">
+      <div class="mobile-brand">EQX <span>RAMP</span></div>
+    </div>
+
+    <!-- MOBILE TAB BAR -->
+    <div class="mobile-tabs">
+      <div class="tab-inner">
+        <button class="tab-btn active" onclick="switchView('chat', this)">Chat</button>
+        <button class="tab-btn" onclick="switchView('kb', this)">Knowledge</button>
+        <button class="tab-btn" onclick="switchView('instructions', this)">Instruct</button>
+        <button class="tab-btn" onclick="switchView('log', this)">Flagged <span class="tab-badge" id="tab-badge" style="display:none">0</span></button>
+        <button class="tab-btn" onclick="switchView('setup', this)">Setup</button>
       </div>
     </div>
 
-    <!-- KNOWLEDGE BASE -->
-    <div class="view" id="view-kb">
-      <div class="view-scroll">
-        <div class="section-eyebrow">Manager Control</div>
-        <div class="section-title">Knowledge Base</div>
-        <div class="section-desc">Everything the assistant knows comes from here. Upload files or write notes directly. The more you add, the better it answers.</div>
+    <!-- VIEWS -->
+    <div class="views">
 
-        <div class="card">
-          <div class="card-eyebrow">📎 Uploaded Files</div>
-          <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
-            <div class="drop-zone-icon">↑</div>
-            <div class="drop-zone-title">Upload Files</div>
-            <div class="drop-zone-sub">PDF · DOCX · TXT · CSV · XLSX — max 5MB</div>
-          </div>
-          <input type="file" id="file-input" multiple accept=".pdf,.txt,.csv,.docx,.doc,.xlsx,.xls,.pptx" style="display:none" onchange="handleFiles(this.files)">
-          <div class="file-list" id="file-list"></div>
+      <!-- CHAT -->
+      <div class="view active" id="view-chat">
+        <div class="chat-header">
+          <div class="eyebrow">AI Assistant</div>
+          <div class="panel-title">Ask Anything</div>
         </div>
+        <div class="messages" id="messages">
+          <div class="msg bot">
+            <div class="msg-from">EQX Ramp</div>
+            <div class="msg-bubble">Welcome. I'm your Equinox assistant. Ask me anything about your role, uniform, systems, pay, or how things work at the club.</div>
+          </div>
+        </div>
+        <div class="input-bar">
+          <textarea class="chat-input" id="chat-input" placeholder="Ask a question..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">↑</button>
+        </div>
+      </div>
 
-        <div class="card">
-          <div class="card-eyebrow">✏️ Notes & FAQs</div>
-          <textarea class="field kb-notes" id="kb-notes" placeholder="Add FAQs, quick facts, or anything the assistant should know...">COMMON QUESTIONS
+      <!-- KNOWLEDGE BASE -->
+      <div class="view" id="view-kb">
+        <div class="view-scroll">
+          <div class="eyebrow">Manager Control</div>
+          <div class="panel-title">Knowledge Base</div>
+          <div class="panel-desc">Everything the assistant knows comes from here. Upload files or write notes directly.</div>
+
+          <div class="card">
+            <div class="card-label">Uploaded Files</div>
+            <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+              <div class="drop-title">Click to upload or drag files here</div>
+              <div class="drop-sub">PDF · DOCX · TXT · CSV · XLSX — max 5MB each</div>
+            </div>
+            <input type="file" id="file-input" multiple accept=".pdf,.txt,.csv,.docx,.doc,.xlsx,.xls" style="display:none" onchange="handleFiles(this.files)">
+            <div class="file-list" id="file-list"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-label">Notes & FAQs</div>
+            <textarea class="field kb-notes" id="kb-notes">COMMON QUESTIONS
 - Q: When do I have a full-time business? A: Once you have 40 sessions every pay period (2 weeks).
 - Q: Can I train clients outside the gym? A: You can only train non-members outside of Equinox. It is illegal to train Equinox members outside of the club.
-- Q: When are projections due? A: Every Saturday by 12:00 pm to your manager.
+- Q: When are weekly projections due? A: Every Saturday by 12:00 pm to your manager. Note: monthly projections exist but the due date is not in the knowledge base yet.
 - Q: Where do I find the call scripts? A: In the shared Google Document titled "EQX Materials Hub" under the "Call Drives" section.
 
 GETTING STARTED
-- Your employee ID gets you into the club. It has your 6-digit employee number if you drop the S (e.g. S123456). Always wear it.
+- Your employee ID gets you into the club. Drop the S from your employee number (e.g. S123456 becomes 123456). Always wear it.
 - Avoid working out during Member Prime Time: Monday-Thursday 5:00pm-8:00pm and Saturday 9:00am-2:00pm.
-- On your first day you will receive emails with your account information and instructions to download the Employee App.
 - Your Equinox login: firstname.lastname@equinox.com
 - Default password: first initial + last initial + last 4 of SSN + exclamation mark (e.g. jd.1234!)
 
 KEY SYSTEMS
-- UltiPro (employees.equinox.com): manage paychecks, direct deposit, benefits, tax withholdings, attendance
-- Connect (connect.equinox.com): helpful links, company updates, internal resources
+- UltiPro (employees.equinox.com): paychecks, direct deposit, benefits, tax withholdings, attendance
+- Connect (connect.equinox.com): company updates, internal resources, helpful links
 - The SPACE (thespace.equinox.com): development and training resources
 - Tech support: https://equinox.service-now.com/sp
 
@@ -585,107 +630,110 @@ PAY AND BENEFITS
 - Your first check will always be a paper check even if you signed up for direct deposit.
 - Benefits are effective the first of the month following your date of hire. You have 30 days to enroll.
 - Benefits enrollment: equinox.smartben.net
-- Questions about benefits: eqxbenefits@benefitsvip.com or 855.299.9300
+- Benefits questions: eqxbenefits@benefitsvip.com or 855.299.9300
 
 EMPLOYEE PERKS
-- You get a complimentary Equinox membership.
-- You get a complimentary 1-hour Personal Training session and a complimentary 1-hour Private Pilates session.
+- Complimentary Equinox membership included.
+- Complimentary 1-hour Personal Training session and 1-hour Private Pilates session.
 - 40% discount on all Equinox services (Personal Training, Spa, Pilates).
 - 40% off most brands at The Shop on Thursday-Sunday.
-- Family membership extension available at 0 dollar initiation and 125 per month, contact your General Manager.
 - Employee perks portal: equinox.perkspot.com
 
-PT UNIFORM POLICY - BRAND STANDARD:
+PT UNIFORM - REQUIRED:
 - Equinox Train or Coach shirt: Black for sessions, Grey for Specialist shifts
-- Equinox name tag, always wear it
+- Equinox name tag at all times
 - Black athletic pants or shorts
-- Athletic sneakers only, no boots, dress shoes, or wedge heeled sneakers
+- Athletic sneakers only (no boots, dress shoes, or wedge heeled sneakers)
 - Only solid black layering pieces
-- Equinox logo black baseball cap, must be worn facing forward
+- Equinox logo black baseball cap worn facing forward
 
-PT UNIFORM POLICY - NOT ALLOWED:
+PT UNIFORM - NOT ALLOWED:
 - Off-brand hats or winter hats
 - Clothing with excessive logos
 - Clothing promoting personal causes or outside companies
-- Jeans, cargo shorts, khakis
+- Jeans, cargo shorts, or khakis
 
 KEY CONTACTS
 - People Services East (NY/NJ/CT/MA): HReast@equinox.com
 - Payroll East: Payrolleast@equinox.com
 - Benefits: eqxbenefits@benefitsvip.com
 - Tech support: https://equinox.service-now.com/sp
-- Ethics Hotline available 24/7: 1.877.217.6362
+- Ethics Hotline 24/7: 1.877.217.6362
 - Leave of absence or FMLA: 800.441.8955</textarea>
-        </div>
+          </div>
 
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="saveKB()">Save</button>
-          <span class="saved-msg" id="kb-saved">Saved</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- INSTRUCTIONS -->
-    <div class="view" id="view-instructions">
-      <div class="view-scroll">
-        <div class="section-eyebrow">Manager Control</div>
-        <div class="section-title">Instructions</div>
-        <div class="section-desc">Control how the assistant speaks, how confident it should be, what topics to escalate, and what to say when it doesn't know something.</div>
-
-        <div class="card">
-          <div class="card-eyebrow">⚙️ Behavior</div>
-          <textarea class="field instructions-field" id="instructions">You are a professional onboarding assistant for Equinox personal trainers called EQX Ramp.
-
-TONE: Direct, warm, and concise. Trainers are busy. Keep answers short and practical. Speak like a knowledgeable colleague, not a policy manual.
-
-CONFIDENCE: Only answer if the information is clearly in the knowledge base. Do not guess or make things up.
-
-WHEN YOU DON'T KNOW: Say something like "I don't have that information yet. I've flagged your question for your manager to review." Never fabricate an answer.
-
-ESCALATE TO MANAGER: Always direct questions about compensation disputes, termination, client injuries, medical situations, or formal complaints to a manager regardless of what is in the knowledge base.
-
-FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="saveInstructions()">Save</button>
-          <span class="saved-msg" id="instr-saved">Saved</span>
+          <div class="btn-row">
+            <button class="btn" onclick="saveKB()">Save</button>
+            <span class="saved-msg" id="kb-saved">Saved</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- FLAGGED LOG -->
-    <div class="view" id="view-log">
-      <div class="view-scroll">
-        <div class="section-eyebrow">Review Queue</div>
-        <div class="section-title">Flagged Questions</div>
-        <div class="section-desc">Questions the assistant couldn't answer. Add the answers to the knowledge base so it improves over time.</div>
-        <div id="log-list">
-          <div class="log-empty">No flagged questions yet.</div>
+      <!-- INSTRUCTIONS -->
+      <div class="view" id="view-instructions">
+        <div class="view-scroll">
+          <div class="eyebrow">Manager Control</div>
+          <div class="panel-title">Instructions</div>
+          <div class="panel-desc">Control the assistant's tone, confidence level, and how it handles questions it can't answer.</div>
+
+          <div class="card">
+            <div class="card-label">Behavior</div>
+            <textarea class="field instr" id="instructions">You are EQX Ramp, a professional internal assistant for Equinox club staff including personal trainers, membership advisors, front desk, and managers.
+
+TONE: Direct, warm, and concise. Staff are busy. Keep answers short and practical. Speak like a knowledgeable colleague, not a policy manual.
+
+CONFIDENCE: Only answer if the information is clearly and explicitly in the knowledge base. Do not approximate or infer.
+
+WHEN YOU DON'T KNOW: If the exact information is not in the knowledge base, you MUST start your response with exactly "UNANSWERED:" — do not answer a related but different question. Flag it warmly and let them know their question has been logged for a manager to review.
+
+ESCALATE TO MANAGER: Always direct questions about compensation disputes, termination, client injuries, medical situations, or formal complaints to a manager.
+
+FORMAT: Short paragraphs. Be human. No bullet walls.</textarea>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn" onclick="saveInstructions()">Save</button>
+            <span class="saved-msg" id="instr-saved">Saved</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- SETUP -->
-    <div class="view" id="view-setup">
-      <div class="view-scroll">
-        <div class="section-eyebrow">Configuration</div>
-        <div class="section-title">Setup</div>
-        <div class="section-desc">Connect EQX Ramp to the Anthropic API to power the assistant.</div>
-
-        <div class="api-notice">
-          The API key is configured on the server. No action needed — the assistant is ready to use.
-        </div>
-
-        <div class="card">
-          <div class="card-eyebrow">✅ Status</div>
-          <div style="font-size:13px; color:var(--gray-400); line-height:1.7;">EQX Ramp is connected and ready. The assistant is powered by Claude via a secure server-side API key. No key entry required.</div>
+      <!-- FLAGGED -->
+      <div class="view" id="view-log">
+        <div class="view-scroll">
+          <div class="eyebrow">Review Queue</div>
+          <div class="panel-title">Flagged Questions</div>
+          <div class="panel-desc">Questions the assistant couldn't answer. Add answers to the knowledge base so it improves over time.</div>
+          <div id="log-list">
+            <div class="log-empty">No flagged questions yet.</div>
+          </div>
         </div>
       </div>
-    </div>
 
-  </div>
-</div>
+      <!-- SETUP -->
+      <div class="view" id="view-setup">
+        <div class="view-scroll">
+          <div class="eyebrow">Configuration</div>
+          <div class="panel-title">Setup</div>
+          <div class="panel-desc">EQX Ramp connection status and configuration.</div>
+
+          <div class="notice">
+            The API key is configured on the server. No action needed — the assistant is ready to use.
+          </div>
+
+          <div class="card">
+            <div class="card-label">Status</div>
+            <div style="font-size:13px; color:var(--g400); line-height:1.8;">
+              EQX Ramp is connected and active. Powered by Claude via a secure server-side API key.<br><br>
+              To update the API key, go to your <a href="https://vercel.com" target="_blank" style="color:var(--white);">Vercel dashboard</a> and update the <code style="font-family:'DM Mono',monospace; font-size:11px; background:var(--g800); padding:2px 6px; border-radius:2px;">ANTHROPIC_API_KEY</code> environment variable.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /views -->
+  </div><!-- /main -->
+</div><!-- /app -->
 
 <script>
   let uploadedFiles = [];
@@ -693,26 +741,18 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
   let conversationHistory = [];
   let isTyping = false;
 
-  window.addEventListener('load', () => {
-    const saved = localStorage.getItem('eqxramp_api_key');
-    if (saved) document.getElementById('api-key').value = saved;
-  });
-
-  function saveApiKey() {
-    const key = document.getElementById('api-key').value.trim();
-    if (key) localStorage.setItem('eqxramp_api_key', key);
-    flashSaved('api-saved');
-  }
-
-  function getApiKey() {
-    return localStorage.getItem('eqxramp_api_key') || document.getElementById('api-key').value.trim();
-  }
-
-  function switchTab(name, el) {
+  function switchView(name, el) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.sidebar-btn, .tab-btn').forEach(b => b.classList.remove('active'));
+
     document.getElementById('view-' + name).classList.add('active');
-    el.classList.add('active');
+
+    // activate both sidebar and tab buttons for this view
+    document.querySelectorAll('.sidebar-btn, .tab-btn').forEach(b => {
+      if (b.getAttribute('onclick') === `switchView('${name}', this)`) {
+        b.classList.add('active');
+      }
+    });
   }
 
   function autoResize(el) {
@@ -733,10 +773,9 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
       if (file.size > 5 * 1024 * 1024) { alert(file.name + ' exceeds 5MB.'); return; }
       const reader = new FileReader();
       reader.onload = (e) => {
-        const existing = uploadedFiles.findIndex(f => f.name === file.name);
+        const idx = uploadedFiles.findIndex(f => f.name === file.name);
         const entry = { name: file.name, size: file.size, content: e.target.result };
-        if (existing >= 0) uploadedFiles[existing] = entry;
-        else uploadedFiles.push(entry);
+        if (idx >= 0) uploadedFiles[idx] = entry; else uploadedFiles.push(entry);
         renderFiles();
       };
       reader.readAsText(file);
@@ -749,16 +788,12 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
     if (!uploadedFiles.length) { list.innerHTML = ''; return; }
     list.innerHTML = uploadedFiles.map((f, i) => {
       const size = f.size < 1024 ? f.size + 'B' : f.size < 1048576 ? Math.round(f.size/1024) + 'KB' : (f.size/1048576).toFixed(1) + 'MB';
-      return `<div class="file-chip">
-        <span class="file-chip-icon">📄</span>
-        <span class="file-chip-name">${f.name}</span>
-        <span class="file-chip-size">${size}</span>
-        <button class="file-chip-remove" onclick="removeFile(${i})">✕</button>
-      </div>`;
+      return `<div class="file-chip"><span class="file-chip-name">📄 ${f.name}</span><span class="file-chip-size">${size}</span><button class="file-chip-remove" onclick="removeFile(${i})">✕</button></div>`;
     }).join('');
   }
 
   function removeFile(i) { uploadedFiles.splice(i, 1); renderFiles(); }
+
   function saveKB() { flashSaved('kb-saved'); }
   function saveInstructions() { flashSaved('instr-saved'); }
 
@@ -772,15 +807,14 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
     return text
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/
-/g, '<br>');
+      .replace(/\n/g, '<br>');
   }
 
   function addMessage(text, role) {
     const msgs = document.getElementById('messages');
     const div = document.createElement('div');
     div.className = 'msg ' + role;
-    div.innerHTML = `<div class="msg-label">${role === 'bot' ? 'EQX Ramp' : 'You'}</div><div class="msg-bubble">${role === 'bot' ? renderMarkdown(text) : text}</div>`;
+    div.innerHTML = `<div class="msg-from">${role === 'bot' ? 'EQX Ramp' : 'You'}</div><div class="msg-bubble">${role === 'bot' ? renderMarkdown(text) : text}</div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
   }
@@ -789,18 +823,26 @@ FORMAT: Use short paragraphs. No bullet walls. Be human.</textarea>
     const msgs = document.getElementById('messages');
     const div = document.createElement('div');
     div.className = 'msg bot'; div.id = 'typing-msg';
-    div.innerHTML = `<div class="msg-label">EQX Ramp</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+    div.innerHTML = `<div class="msg-from">EQX Ramp</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
   }
 
   function removeTyping() { const t = document.getElementById('typing-msg'); if (t) t.remove(); }
 
+  function updateBadge(count) {
+    ['sidebar-badge','tab-badge'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.display = count > 0 ? 'inline' : 'none';
+      el.textContent = count;
+    });
+  }
+
   function logUnanswered(question) {
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     unansweredLog.unshift({ question, time });
-    const badge = document.getElementById('badge');
-    badge.style.display = 'inline'; badge.textContent = unansweredLog.length;
+    updateBadge(unansweredLog.length);
     document.getElementById('log-list').innerHTML = unansweredLog.map(item => `
       <div class="log-item">
         <div class="log-q">${item.question}</div>
@@ -833,7 +875,7 @@ KNOWLEDGE BASE:
 ${kb || 'The knowledge base is empty.'}
 
 ---
-RULE: If the exact information requested is not clearly and explicitly in the knowledge base, you MUST start your response with exactly "UNANSWERED:" — do not approximate, infer, or answer a related but different question. If someone asks about monthly projections and you only have weekly projections, that is UNANSWERED. Be precise.`;
+CRITICAL RULE: If the exact information requested is not clearly present in the knowledge base, you MUST start your response with exactly "UNANSWERED:" — do not approximate, infer, or substitute a related answer.`;
 
     try {
       const res = await fetch('/api/chat', {
@@ -853,7 +895,7 @@ RULE: If the exact information requested is not clearly and explicitly in the kn
 
       if (data.error) { addMessage('Error: ' + data.error.message, 'bot'); return; }
 
-      const reply = data.content?.[0]?.text || "Something went wrong.";
+      const reply = data.content?.[0]?.text || 'Something went wrong. Please try again.';
 
       if (reply.startsWith('UNANSWERED:')) {
         const clean = reply.replace('UNANSWERED:', '').trim();
@@ -868,7 +910,7 @@ RULE: If the exact information requested is not clearly and explicitly in the kn
     } catch (err) {
       removeTyping(); isTyping = false;
       document.getElementById('send-btn').disabled = false;
-      addMessage('Error: ' + err.message, 'bot');
+      addMessage('Connection error: ' + err.message, 'bot');
     }
   }
 </script>
